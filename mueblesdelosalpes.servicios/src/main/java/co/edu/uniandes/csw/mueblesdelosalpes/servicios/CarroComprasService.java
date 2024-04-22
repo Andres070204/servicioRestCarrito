@@ -19,9 +19,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
  
-@Path("/carrito")
-@Produces(MediaType.APPLICATION_JSON)
+@Path("/Carrito")
+@Stateless
 @Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public class CarroComprasService {
  
     /**
@@ -36,8 +37,9 @@ public class CarroComprasService {
      * @param mb Mueble en formato JSON, que automáticamente se parsea a un objeto Mueble por el API REST.
      */
    
+
+    
     @POST
-    @Path("/agregar")
     public List<Mueble> agregarMuebles(List<Mueble> mb) {
         for (Mueble mueble : mb) {
             carroEjb.agregarItem(mueble);
@@ -47,7 +49,7 @@ public class CarroComprasService {
     }
     
     @DELETE
-    @Path("/eliminar")
+    
     public void eliminarMuebles(List<Mueble> mb) {
         for (Mueble mueble : mb) {
             carroEjb.removerItem(mueble, true);
@@ -59,9 +61,7 @@ public class CarroComprasService {
      * @return la lista JSON con los muebles actuales del carrito.
   
      */
-    
     @GET
-    @Path("/muebles")
     public List<Mueble> getTodosLosMuebles() {
         return carroEjb.getInventario();
  
